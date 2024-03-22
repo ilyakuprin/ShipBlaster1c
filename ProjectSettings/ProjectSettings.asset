@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: a3520923faee77f43acbfd9524d791af
+  productGUID: 8b28756871dfb924990825a7d80653d9
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -693,10 +693,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: c3edc2c6-5d0e-4af1-aa7d-7eebd465c192
+  cloudProjectId: 7c3cd4e3-2801-4f7e-9262-dec5f84a7c9c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ShipBlaster1c 2024-03-22_19-06-42
+  projectName: ShipBlaster1c
   organizationId: i_tau
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
