@@ -1,4 +1,3 @@
-using PlayingField;
 using ScriptableObj;
 using UnityEngine;
 using Zenject;
@@ -10,7 +9,7 @@ namespace MainHero
         private static readonly Vector3 LowerLeftCorner = new Vector3(0, 0, 0);
         private static readonly Vector3 LowerRightCorner = new Vector3(1, 0, 0);
         
-        private readonly ScreenView _screenView;
+        private readonly Camera _camera;
         private readonly SpriteRenderer _spriteRenderer;
         private readonly PlayingFieldConfig _playingFieldConfig;
         
@@ -19,11 +18,11 @@ namespace MainHero
         private float _bottomBorder;
         private float _upperBorder;
 
-        public ScreenBoundsCalculation(ScreenView screenView,
+        public ScreenBoundsCalculation(Camera camera,
                                        MainHeroView mainHero,
                                        PlayingFieldConfig playingFieldConfig)
         {
-            _screenView = screenView;
+            _camera = camera;
             _spriteRenderer = mainHero.SpriteRenderer;
             _playingFieldConfig = playingFieldConfig;
         }
@@ -45,10 +44,10 @@ namespace MainHero
             var halfPlayerSizeX = bounds.size.x / 2;
             var halfPlayerSizeY = sizeY / 2;
 
-            var leftBottomCorner = _screenView.Camera.ViewportToWorldPoint(LowerLeftCorner);
+            var leftBottomCorner = _camera.ViewportToWorldPoint(LowerLeftCorner);
             
             _leftBorder = leftBottomCorner.x + halfPlayerSizeX;
-            _rightBorder = _screenView.Camera.ViewportToWorldPoint(LowerRightCorner).x - halfPlayerSizeX;
+            _rightBorder = _camera.ViewportToWorldPoint(LowerRightCorner).x - halfPlayerSizeX;
             _bottomBorder = leftBottomCorner.y + halfPlayerSizeY;
             _upperBorder = (leftBottomCorner.y + sizeY * _playingFieldConfig.FinishLineHeightInMainHero)
                            - halfPlayerSizeY;
