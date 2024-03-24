@@ -6,5 +6,7 @@ namespace ScriptableObj
     public class MainHeroConfig : ScriptableObject
     {
         [field: SerializeField, Range(0.1f, 10f)] public float Speed { get; private set; }
+        [field: SerializeField, Range(1, 10)] public int BulletDamage { get; private set; }
+        [field: SerializeField, Range(1, 50)] public int Health { get; private set; }
     }
 }

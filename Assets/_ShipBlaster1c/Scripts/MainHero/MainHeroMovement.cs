@@ -47,8 +47,8 @@ namespace MainHero
 
         public void FixedTick()
         {
-            var targetPosition
-                = _screenBoundsCalculation.GetClamp(_rigidbody.position + _moveVelocity * Time.deltaTime);
+            var targetPosition = _screenBoundsCalculation
+                .GetClamp(_rigidbody.position + _moveVelocity * Time.fixedDeltaTime);
             
             _rigidbody.MovePosition(targetPosition);
         } 

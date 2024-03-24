@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Triggers;
@@ -6,31 +5,29 @@ using StringValues;
 
 namespace Enemy
 {
-    public class EnemyTakingDamage
+    public class EnemyReachingFinish
     {
-        public event Action<int> Taken;
-
-        private readonly int _damage;
+        private readonly ReturningEnemyInPool _returningEnemyInPool;
         private readonly EnemyView _enemy;
         
         private AsyncTriggerEnter2DTrigger _trigger;
         private CancellationToken _ct;
-        private int _layerBullet;
+        private int _layerFinish;
         private bool _isStarted;
 
-        public EnemyTakingDamage(int damage,
-                                 EnemyView enemy)
+        public EnemyReachingFinish(ReturningEnemyInPool returningEnemyInPool,
+                                   EnemyView enemy)
         {
-            _damage = damage;
+            _returningEnemyInPool = returningEnemyInPool;
             _enemy = enemy;
         }
         
         public void Init()
         {
             _trigger = _enemy.Rigidbody.GetAsyncTriggerEnter2DTrigger();
-            _ct = _enemy.GetCancellationTokenOnDestroy();
+            _ct = _enemy.Rigidbody.GetCancellationTokenOnDestroy();
             
-            _layerBullet = LayerCaching.Bullet;
+            _layerFinish = LayerCaching.Finish;
         }
         
         public void StartDetectCollision()
@@ -49,9 +46,9 @@ namespace Enemy
             {
                 var uniTask = _trigger.OnTriggerEnter2DAsync(_ct);
                 await uniTask;
-                if (uniTask.GetAwaiter().GetResult().gameObject.layer == _layerBullet)
+                if (uniTask.GetAwaiter().GetResult().gameObject.layer == _layerFinish)
                 {
-                    Taken?.Invoke(_damage);
+                    _returningEnemyInPool.Return(_enemy);
                 }
             }
 

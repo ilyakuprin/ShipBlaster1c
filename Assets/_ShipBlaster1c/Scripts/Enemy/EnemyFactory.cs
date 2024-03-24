@@ -4,17 +4,43 @@ using Zenject;
 
 namespace Enemy
 {
-    public class EnemyFactory<T> : BaseFactory<T> where T : MonoBehaviour
+    public class EnemyFactory: BaseFactory<EnemyView>, IInitializable
     {
-        public EnemyFactory(DiContainer container, T prefab, Transform parent) : base(container, prefab, parent)
+        private readonly Pool<EnemyView> _pool;
+        
+        public EnemyFactory(DiContainer container,
+                            EnemyView prefab,
+                            Transform parent,
+                            Pool<EnemyView> pool) 
+            : base(container,
+                   prefab,
+                   parent)
         {
+            _pool = pool;
         }
 
-        public T Get()
+        public void Initialize()
+            => FillStartPool();
+
+        public EnemyView Get()
         {
-            var obj = GetCreateObject();
+            if (!_pool.TryGet(out var obj))
+            {
+                obj = GetCreateObject();
+            }
+
+            obj.SettingStartValues.Init();
 
             return obj;
+        }
+
+        private void FillStartPool()
+        {
+            for (var i = 0; i < _pool.Capacity; i++)
+            {
+                var obj = GetCreateObject();
+                _pool.Return(obj);
+            }
         }
     }
 }

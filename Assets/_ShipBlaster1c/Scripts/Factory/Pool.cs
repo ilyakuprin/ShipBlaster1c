@@ -6,13 +6,14 @@ namespace Factory
     public class Pool<T> where T : MonoBehaviour
     {
         private readonly List<T> _pool;
-
+        
         public Pool(int startLengthPool)
         {
             _pool = new List<T>(startLengthPool);
         }
-
-        public int Count => _pool.Count;
+        
+        public int Capacity => _pool.Capacity;
+        private int Count => _pool.Count;
 
         public void Return(T obj)
         {
@@ -26,10 +27,11 @@ namespace Factory
         {
             for (var i = 0; i < Count; i++)
             {
-                if (_pool[i] == null) continue;
+                if (!_pool[i]) continue;
                 
                 SetActiveGameObj(_pool[i], true);
                 obj = _pool[i];
+                _pool[i] = null;
                 return true;
             }
 
@@ -41,7 +43,7 @@ namespace Factory
         {
             for (var i = 0; i < Count; i++)
             {
-                if (_pool[i] != null) continue;
+                if (_pool[i]) continue;
                 
                 _pool[i] = obj;
                 return true;

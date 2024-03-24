@@ -31,7 +31,9 @@ namespace Enemy
 
             for (var i = 0; i < length; i++)
             {
-                _spawnPoints[i] = _camera.ScreenToWorldPoint(_playingFieldView.GetSpawnPoint(i).position);
+                var position = _camera.ScreenToWorldPoint(_playingFieldView.GetSpawnPoint(i).position);
+                position.z = 0;
+                _spawnPoints[i] = position;
             }
         }
     }
