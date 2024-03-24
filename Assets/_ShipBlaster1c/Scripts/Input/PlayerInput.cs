@@ -19,7 +19,10 @@ namespace Inputting
         }
 
         public void SetPause(bool value)
-            => _isPause = value;
+        {
+            _isPause = value;
+            Inputted?.Invoke(new InputData());
+        } 
 
         protected abstract InputData GetInputData();
     }

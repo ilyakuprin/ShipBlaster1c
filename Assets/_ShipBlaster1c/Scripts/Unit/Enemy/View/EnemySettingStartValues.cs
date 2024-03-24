@@ -1,3 +1,4 @@
+using Factory;
 using GameStatus;
 using MainHero;
 using ScriptableObj;
@@ -9,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Enemy
 {
-    public class EnemySettingStartValues : MonoBehaviour
+    public class EnemySettingStartValues : MonoBehaviour, IInitializableValues
     {
         [SerializeField] private EnemyView _enemyView;
         
@@ -18,7 +19,7 @@ namespace Enemy
         private ReturningEnemyInPool _returningEnemyInPool;
         private SettingPause _settingPause;
 
-        private EnemyMovement _enemyMovement;
+        private ObjectMovement _objectMovement;
         private TakingDamage _enemyTakingDamage;
         private Health _health;
         private EnemyReachingFinish _enemyReachingFinish;
@@ -49,15 +50,15 @@ namespace Enemy
         public void InitValues()
         {
             var speed = Random.Range(_enemyConfig.MinSpeed, _enemyConfig.MaxSpeed);
-            _enemyMovement.StartMove(speed);
+            _objectMovement.StartMove(speed);
             _enemyTakingDamage.StartDetectCollision();
             _enemyReachingFinish.StartDetectCollision();
         }
 
         private void InitMovement()
         {
-            _enemyMovement = new EnemyMovement(_enemyView.Rigidbody);
-            _enemyMovement.Init();
+            _objectMovement = new ObjectMovement(_enemyView.Rigidbody, Vector2.down);
+            _objectMovement.Init();
         }
 
         private void InitHealth()
@@ -76,13 +77,13 @@ namespace Enemy
 
         private void InitReachingFinish()
         {
-            _enemyReachingFinish = new EnemyReachingFinish(_returningEnemyInPool, _enemyView);
+            _enemyReachingFinish = new EnemyReachingFinish(_returningEnemyInPool, _enemyView, LayerCaching.Finish);
             _enemyReachingFinish.Init();
         }
 
         private void InitSettingPause()
         {
-            _enemyPause = new EnemyPause(_enemyMovement, _settingPause);
+            _enemyPause = new EnemyPause(_objectMovement, _settingPause);
             _enemyPause.Init();
         }
     }

@@ -4,18 +4,21 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class EnemyMovement
+    public class ObjectMovement
     {
         private readonly Rigidbody2D _rigidbody;
+        private readonly Vector2 _direction;
         private CancellationToken _ct;
         private float _speed;
 
         private bool _isMoved;
         private bool _isPause;
 
-        public EnemyMovement(Rigidbody2D rigidbody)
+        public ObjectMovement(Rigidbody2D rigidbody,
+                              Vector2 direction)
         {
             _rigidbody = rigidbody;
+            _direction = direction;
         }
 
         public void Init()
@@ -44,7 +47,7 @@ namespace Enemy
             
             while (gameObj.activeInHierarchy)
             {
-                _rigidbody.MovePosition(_rigidbody.position + Vector2.down * (_speed * Time.fixedDeltaTime));
+                _rigidbody.MovePosition(_rigidbody.position + _direction * (_speed * Time.fixedDeltaTime));
                 await UniTask.WaitForFixedUpdate(_ct);
 
                 while (_isPause)

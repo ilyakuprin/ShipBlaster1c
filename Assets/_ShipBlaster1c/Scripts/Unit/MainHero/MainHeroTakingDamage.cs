@@ -8,8 +8,13 @@ namespace MainHero
     {
         private const int Damage = 1;
         
-        public MainHeroTakingDamage(Collider2D collider, int layerDamagableObj, MainHeroHealth health)
-            : base(Damage, collider, layerDamagableObj, health)
+        public MainHeroTakingDamage(Collider2D collider,
+                                    int layerDetectingObj,
+                                    MainHeroHealth health)
+            : base(Damage,
+                   collider,
+                   layerDetectingObj,
+                   health)
         {
         }
 
