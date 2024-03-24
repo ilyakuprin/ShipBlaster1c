@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be13b03775b04e4cb195d98e7f4f014c, type: 3}
-  m_Name: MainHeroConfig
+  m_Script: {fileID: 11500000, guid: 72e44e64c8e547be8eab6fa6a1cd2fb7, type: 3}
+  m_Name: BulletConfig
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 5.53
-  <RechargeWeaponInSec>k__BackingField: 0.31
-  <Health>k__BackingField: 2
-  <RadiusFire>k__BackingField: 7.15
+  <Prefab>k__BackingField: {fileID: 4187181269989539039, guid: 39d25fb764c8a8047977f4ceeab5173e, type: 3}
+  <Speed>k__BackingField: 5.92
+  <Damage>k__BackingField: 1

@@ -813,6 +813,7 @@ GameObject:
   - component: {fileID: 1015059895}
   - component: {fileID: 1015059896}
   - component: {fileID: 1015059897}
+  - component: {fileID: 1015059898}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -850,6 +851,7 @@ MonoBehaviour:
   <Rigidbody>k__BackingField: {fileID: 1901454068}
   <SpriteRenderer>k__BackingField: {fileID: 1901454066}
   <Finish>k__BackingField: {fileID: 1857835377}
+  <FirePoint>k__BackingField: {fileID: 399693566}
 --- !u!114 &1015059895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +894,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DefeatCanvas>k__BackingField: {fileID: 1945346660}
+  <Restart>k__BackingField: {fileID: 772342032}
+--- !u!114 &1015059898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015059892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a943a625de540739b414fa09228c893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <VictoryCanvas>k__BackingField: {fileID: 1922499747}
+  <Restart>k__BackingField: {fileID: 1222292302}
 --- !u!1 &1090620254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1393,7 @@ GameObject:
   - component: {fileID: 1452899568}
   - component: {fileID: 1452899569}
   - component: {fileID: 1452899570}
+  - component: {fileID: 1452899571}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1429,6 +1447,7 @@ MonoBehaviour:
   - {fileID: 1452899568}
   - {fileID: 1452899569}
   - {fileID: 1452899570}
+  - {fileID: 1452899571}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1504,6 +1523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameProcessCanvasView: {fileID: 1015059896}
   _defeatCanvasView: {fileID: 1015059897}
+  _victoryCanvasView: {fileID: 1015059898}
 --- !u!114 &1452899570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1516,6 +1536,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46b5e476f2d4692bfc6dd6c97392c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1452899571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452899562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 818a74ebd4694ca6b76965599a6965eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletParent: {fileID: 945562611}
+  _bulletConfig: {fileID: 11400000, guid: 329b6a030bd7e1b4db09c6c290e726b0, type: 2}
 --- !u!1 &1576528673
 GameObject:
   m_ObjectHideFlags: 0

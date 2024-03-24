@@ -23,17 +23,18 @@ namespace Enemy
         private TakingDamage _enemyTakingDamage;
         private Health _health;
         private EnemyReachingFinish _enemyReachingFinish;
-        private EnemyPause _enemyPause;
+        private MovementObjPause _movementObjPause;
+        private EnemyDeath _death;
 
         [Inject]
         public void Construct(EnemyConfig enemyConfig,
-                              MainHeroConfig mainHeroConfig,
+                              BulletConfig bulletConfig,
                               ReturningEnemyInPool returningEnemyInPool,
                               MainHeroHealth mainHeroHealth,
                               SettingPause settingPause)
         {
             _enemyConfig = enemyConfig;
-            _takingDamage = mainHeroConfig.BulletDamage;
+            _takingDamage = bulletConfig.Damage;
             _returningEnemyInPool = returningEnemyInPool;
             _settingPause = settingPause;
         }
@@ -45,6 +46,7 @@ namespace Enemy
             InitTakingDamage();
             InitReachingFinish();
             InitSettingPause();
+            InitDeath();
         }
 
         public void InitValues()
@@ -83,8 +85,14 @@ namespace Enemy
 
         private void InitSettingPause()
         {
-            _enemyPause = new EnemyPause(_objectMovement, _settingPause);
-            _enemyPause.Init();
+            _movementObjPause = new MovementObjPause(_objectMovement, _settingPause);
+            _movementObjPause.Init();
+        }
+
+        private void InitDeath()
+        {
+            _death = new EnemyDeath(_enemyView, _returningEnemyInPool, _health);
+            _death.Init();
         }
     }
 }

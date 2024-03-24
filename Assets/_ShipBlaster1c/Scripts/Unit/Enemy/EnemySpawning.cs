@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using ScriptableObj;
+using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -49,10 +50,15 @@ namespace Enemy
             while (!_cts.IsCancellationRequested)
             {
                 var timeWait = Random.Range(_enemyConfig.MinTimeoutSpawnInSec, _enemyConfig.MaxTimeoutSpawnInSec);
-                await UniTask.WaitForSeconds(timeWait, false, PlayerLoopTiming.Update, _cts.Token);
-                
-                while (_isPause)
-                    await UniTask.NextFrame();
+
+                while (timeWait > 0)
+                {
+                    timeWait -= Time.deltaTime;
+                    await UniTask.NextFrame(_cts.Token);
+
+                    while (_isPause)
+                        await UniTask.NextFrame(_cts.Token);
+                }
                 
                 Spawn();
             }

@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 namespace UserInterface
 {
-    public class DefeatCanvasView : MonoBehaviour
+    public class VictoryCanvasView : MonoBehaviour
     {
-        [field: SerializeField] public Canvas DefeatCanvas { get; private set; }
+        [field: SerializeField] public Canvas VictoryCanvas { get; private set; }
         [field: SerializeField] public Button Restart { get; private set; }
     }
 }

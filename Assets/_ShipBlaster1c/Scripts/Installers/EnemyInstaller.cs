@@ -17,7 +17,8 @@ namespace Installers
 
             Container.BindInterfacesAndSelfTo<Pool<EnemyView>>()
                 .FromInstance(new Pool<EnemyView>(EnemyConfig.PoolStartCapacity)).AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle().WithArguments(_enemyConfig.Prefab, _parent);
+            Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle()
+                .WithArguments(_enemyConfig.Prefab, _parent);
             Container.BindInterfacesAndSelfTo<GettingSpawnPoint>().AsSingle();
             Container.BindInterfacesAndSelfTo<ReturningEnemyInPool>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawning>().AsSingle();

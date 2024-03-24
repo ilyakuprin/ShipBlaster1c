@@ -22,7 +22,7 @@ namespace GameStatus
             => SetPause(true);
         
         public void PauseOff()
-            => SetPause(false);
+            => SetPause(true);
         
         private void SetPause(bool value)
         {

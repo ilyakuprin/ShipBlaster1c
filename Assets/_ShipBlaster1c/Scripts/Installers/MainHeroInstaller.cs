@@ -11,11 +11,11 @@ namespace Installers
         [SerializeField] private MainHeroView _mainHeroView;
         [SerializeField] private MainHeroConfig _mainHeroConfig;
         
-        
         public override void InstallBindings()
         {
             Container.Bind<MainHeroView>().FromInstance(_mainHeroView).AsSingle();
             Container.Bind<MainHeroConfig>().FromInstance(_mainHeroConfig).AsSingle();
+            
 
             Container.BindInterfacesAndSelfTo<MainHeroMovement>().AsSingle();
             Container.BindInterfacesAndSelfTo<ScreenBoundsCalculation>().AsSingle();
@@ -23,6 +23,7 @@ namespace Installers
                 .WithArguments(_mainHeroView.Finish, LayerCaching.Enemy);
             Container.BindInterfacesAndSelfTo<MainHeroHealth>().AsSingle()
                 .WithArguments(_mainHeroConfig.Health);
+            Container.BindInterfacesAndSelfTo<Shooting>().AsSingle();
         }
     }
 }

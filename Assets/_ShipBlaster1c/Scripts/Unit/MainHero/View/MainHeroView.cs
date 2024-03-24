@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 namespace MainHero
@@ -8,5 +7,6 @@ namespace MainHero
         [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         [field: SerializeField] public Collider2D Finish { get; private set; }
+        [field: SerializeField] public Transform FirePoint { get; private set; }
     }
 }

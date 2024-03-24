@@ -3,12 +3,12 @@ using GameStatus;
 
 namespace Enemy
 {
-    public class EnemyPause : IDisposable
+    public class MovementObjPause : IDisposable
     {
         private readonly ObjectMovement _objectMovement;
         private readonly SettingPause _settingPause;
 
-        public EnemyPause(ObjectMovement objectMovement,
+        public MovementObjPause(ObjectMovement objectMovement,
                           SettingPause settingPause)
         {
             _objectMovement = objectMovement;
