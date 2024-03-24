@@ -1,5 +1,5 @@
 using System.Linq;
-using _ShipBlaster1c.Scripts.Inputting;
+using Inputting;
 using Zenject;
 
 namespace Installers

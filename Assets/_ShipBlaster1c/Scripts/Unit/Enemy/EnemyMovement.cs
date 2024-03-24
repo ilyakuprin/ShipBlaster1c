@@ -11,6 +11,7 @@ namespace Enemy
         private float _speed;
 
         private bool _isMoved;
+        private bool _isPause;
 
         public EnemyMovement(Rigidbody2D rigidbody)
         {
@@ -30,6 +31,12 @@ namespace Enemy
             Move().Forget();
         }
 
+        public void SetPause(bool value)
+        {
+            if (_rigidbody.gameObject.activeInHierarchy)
+                _isPause = value;
+        } 
+
         private async UniTask Move()
         {
             _isMoved = true;
@@ -39,6 +46,9 @@ namespace Enemy
             {
                 _rigidbody.MovePosition(_rigidbody.position + Vector2.down * (_speed * Time.fixedDeltaTime));
                 await UniTask.WaitForFixedUpdate(_ct);
+
+                while (_isPause)
+                    await UniTask.NextFrame();
             }
 
             _isMoved = false;

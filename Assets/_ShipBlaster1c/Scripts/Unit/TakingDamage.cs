@@ -1,57 +1,59 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Triggers;
 using StringValues;
+using UnityEngine;
 
-namespace Enemy
+namespace Unit
 {
-    public class EnemyTakingDamage
+    public class TakingDamage
     {
-        public event Action<int> Taken;
-
         private readonly int _damage;
-        private readonly EnemyView _enemy;
-        
+        private readonly Collider2D _collider;
+        private readonly Health _health;
+
         private AsyncTriggerEnter2DTrigger _trigger;
         private CancellationToken _ct;
-        private int _layerBullet;
+        private int _layerDamagableObj;
         private bool _isStarted;
 
-        public EnemyTakingDamage(int damage,
-                                 EnemyView enemy)
+        public TakingDamage(int damage,
+                            Collider2D collider,
+                            int layerDamagableObj,
+                            Health health)
         {
             _damage = damage;
-            _enemy = enemy;
+            _collider = collider;
+            _layerDamagableObj = layerDamagableObj;
+            _health = health;
         }
-        
+
         public void Init()
         {
-            _trigger = _enemy.Rigidbody.GetAsyncTriggerEnter2DTrigger();
-            _ct = _enemy.GetCancellationTokenOnDestroy();
-            
-            _layerBullet = LayerCaching.Bullet;
+            _trigger = _collider.GetAsyncTriggerEnter2DTrigger();
+            _ct = _collider.GetCancellationTokenOnDestroy();
         }
-        
+
         public void StartDetectCollision()
         {
             if (_isStarted) return;
-            
+
             DetectCollision().Forget();
-        } 
-        
+        }
+
         private async UniTaskVoid DetectCollision()
         {
             _isStarted = true;
-            
-            var gameObj = _enemy.Rigidbody.gameObject;
+
+            var gameObj = _collider.gameObject;
             while (gameObj.activeInHierarchy)
             {
                 var uniTask = _trigger.OnTriggerEnter2DAsync(_ct);
                 await uniTask;
-                if (uniTask.GetAwaiter().GetResult().gameObject.layer == _layerBullet)
+
+                if (uniTask.GetAwaiter().GetResult().gameObject.layer == _layerDamagableObj)
                 {
-                    Taken?.Invoke(_damage);
+                    _health.TakeDamage(_damage);
                 }
             }
 

@@ -1,7 +1,7 @@
 using _ShipBlaster1c.Scripts.StringValues;
 using UnityEngine;
 
-namespace _ShipBlaster1c.Scripts.Inputting
+namespace Inputting
 {
     public class KeyboardInput : PlayerInput
     {

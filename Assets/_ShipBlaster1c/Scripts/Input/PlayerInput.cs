@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-namespace _ShipBlaster1c.Scripts.Inputting
+namespace Inputting
 {
     public abstract class PlayerInput : ITickable
     {

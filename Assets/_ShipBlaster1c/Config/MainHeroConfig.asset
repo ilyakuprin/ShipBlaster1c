@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: MainHeroConfig
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 5.53
+  <BulletDamage>k__BackingField: 0
+  <Health>k__BackingField: 1

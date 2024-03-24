@@ -1,4 +1,4 @@
-namespace _ShipBlaster1c.Scripts.Inputting
+namespace Inputting
 {
     public interface IExecutive
     {

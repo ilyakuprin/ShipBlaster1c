@@ -7,15 +7,18 @@ using Random = UnityEngine.Random;
 
 namespace Enemy
 {
-    public class EnemyTimerSpawn : IInitializable, IDisposable
+    public class EnemySpawning : IInitializable, IDisposable
     {
+        public event Action Spawned; 
+        
         private readonly EnemyFactory _makingEnemies;
         private readonly GettingSpawnPoint _gettingSpawnPoint;
         private readonly EnemyConfig _enemyConfig;
 
         private CancellationTokenSource _cts;
+        private bool _isPause;
 
-        public EnemyTimerSpawn(EnemyFactory makingEnemies,
+        public EnemySpawning(EnemyFactory makingEnemies,
                                GettingSpawnPoint gettingSpawnPoint,
                                EnemyConfig enemyConfig)
         {
@@ -32,9 +35,14 @@ namespace Enemy
 
         public void Dispose()
         {
+            if (_cts.IsCancellationRequested) return;
+
             _cts.Cancel();
             _cts.Dispose();
         }
+
+        public void SetPause(bool value)
+            => _isPause = value;
 
         private async UniTaskVoid Timer()
         {
@@ -42,6 +50,10 @@ namespace Enemy
             {
                 var timeWait = Random.Range(_enemyConfig.MinTimeoutSpawnInSec, _enemyConfig.MaxTimeoutSpawnInSec);
                 await UniTask.WaitForSeconds(timeWait, false, PlayerLoopTiming.Update, _cts.Token);
+                
+                while (_isPause)
+                    await UniTask.NextFrame();
+                
                 Spawn();
             }
         }
@@ -50,6 +62,8 @@ namespace Enemy
         {
             var enemy = _makingEnemies.Get();
             enemy.transform.position = _gettingSpawnPoint.GetSpawnPoint();
+            
+            Spawned?.Invoke();
         }
     }
 }

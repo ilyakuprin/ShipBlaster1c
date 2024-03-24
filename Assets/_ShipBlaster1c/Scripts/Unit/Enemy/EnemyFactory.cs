@@ -29,7 +29,7 @@ namespace Enemy
                 obj = GetCreateObject();
             }
 
-            obj.SettingStartValues.Init();
+            obj.SettingStartValues.InitValues();
 
             return obj;
         }

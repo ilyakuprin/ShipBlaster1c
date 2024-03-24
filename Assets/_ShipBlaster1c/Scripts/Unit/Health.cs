@@ -1,16 +1,16 @@
 using System;
 
-namespace Enemy
+namespace Unit
 {
-    public class EnemyHealth
+    public class Health
     {
         public event Action Dead;
-        public event Action TakenDamage;
+        public event Action<int> TakenDamage;
 
         private const int MinHealth = 0;
         private int _currentHealth;
 
-        public EnemyHealth(int startHealth)
+        public Health(int startHealth)
         {
             _currentHealth = startHealth;
         }
@@ -27,7 +27,7 @@ namespace Enemy
                 Dead?.Invoke();
             }
 
-            TakenDamage?.Invoke();
+            TakenDamage?.Invoke(_currentHealth);
         }
     }
 }

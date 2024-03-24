@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _ShipBlaster1c.Scripts.Inputting
+namespace Inputting
 {
     public struct InputData
     {

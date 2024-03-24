@@ -1,5 +1,5 @@
 using System;
-using _ShipBlaster1c.Scripts.Inputting;
+using Inputting;
 using ScriptableObj;
 using UnityEngine;
 using Zenject;

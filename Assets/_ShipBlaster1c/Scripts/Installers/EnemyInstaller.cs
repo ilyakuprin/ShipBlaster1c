@@ -20,7 +20,8 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle().WithArguments(_enemyConfig.Prefab, _parent);
             Container.BindInterfacesAndSelfTo<GettingSpawnPoint>().AsSingle();
             Container.BindInterfacesAndSelfTo<ReturningEnemyInPool>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemyTimerSpawn>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemySpawning>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyCounter>().AsSingle();
         }
     }
 }
