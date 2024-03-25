@@ -1,6 +1,7 @@
 using System;
 using Inputting;
 using Enemy;
+using MainHero;
 
 namespace GameStatus
 {
@@ -10,12 +11,15 @@ namespace GameStatus
         
         private readonly PlayerInput _playerInput;
         private readonly EnemySpawning _enemySpawning;
+        private readonly Shooting _shooting;
 
         public SettingPause(PlayerInput playerInput,
-                            EnemySpawning enemySpawning)
+                            EnemySpawning enemySpawning,
+                            Shooting shooting)
         {
             _playerInput = playerInput;
             _enemySpawning = enemySpawning;
+            _shooting = shooting;
         }
 
         public void PauseOn()
@@ -28,6 +32,7 @@ namespace GameStatus
         {
             _enemySpawning.SetPause(value);
             _playerInput.SetPause(value);
+            _shooting.SetPause(value);
             
             Set?.Invoke(value);
         }

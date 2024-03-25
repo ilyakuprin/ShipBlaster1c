@@ -9,6 +9,7 @@ namespace Installers
         {
             Container.BindInterfacesAndSelfTo<SettingPause>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnablingPauseDeath>().AsSingle();
+            Container.BindInterfacesAndSelfTo<VictoryChecking>().AsSingle();
         }
     }
 }

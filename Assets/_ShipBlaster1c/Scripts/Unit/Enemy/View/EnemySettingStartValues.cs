@@ -55,6 +55,7 @@ namespace Enemy
             _objectMovement.StartMove(speed);
             _enemyTakingDamage.StartDetectCollision();
             _enemyReachingFinish.StartDetectCollision();
+            _health.SetHealth(_enemyConfig.Health);
         }
 
         private void InitMovement()
@@ -65,7 +66,7 @@ namespace Enemy
 
         private void InitHealth()
         {
-            _health = new Health(_enemyConfig.Health);
+            _health = new Health();
         }
 
         private void InitTakingDamage()

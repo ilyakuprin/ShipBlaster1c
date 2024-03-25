@@ -1,34 +1,34 @@
 using System;
-using UnityEngine;
 
 namespace Unit
 {
     public class Health
     {
+        private const int MinHealth = 0;
+        
         public event Action Dead;
         public event Action<int> TakenDamage;
+        
+        public int CurrentHealth { get; private set; }
 
-        private const int MinHealth = 0;
-        private int _currentHealth;
-
-        public Health(int startHealth)
+        public void SetHealth(int startHealth)
         {
-            _currentHealth = startHealth;
+            CurrentHealth = startHealth;
         }
 
         public void TakeDamage(int value)
         {
             if (value <= 0) return;
 
-            _currentHealth -= value;
+            CurrentHealth -= value;
             
-            if (_currentHealth <= MinHealth)
+            if (CurrentHealth <= MinHealth)
             {
-                _currentHealth = MinHealth;
+                CurrentHealth = MinHealth;
                 Dead?.Invoke();
             }
 
-            TakenDamage?.Invoke(_currentHealth);
+            TakenDamage?.Invoke(CurrentHealth);
         }
     }
 }

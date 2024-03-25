@@ -1,4 +1,3 @@
-using GameStatus;
 using UnityEngine;
 using UserInterface;
 using Zenject;
@@ -20,6 +19,7 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<ChangingHealthMainHero>().AsSingle();
             Container.BindInterfacesAndSelfTo<ShowingDefeatScreen>().AsSingle();
             Container.BindInterfacesAndSelfTo<RestartingButton>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ShowingVictoryScreen>().AsSingle();
         }
     }
 }

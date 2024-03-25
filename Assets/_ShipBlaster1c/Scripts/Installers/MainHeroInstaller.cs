@@ -15,7 +15,6 @@ namespace Installers
         {
             Container.Bind<MainHeroView>().FromInstance(_mainHeroView).AsSingle();
             Container.Bind<MainHeroConfig>().FromInstance(_mainHeroConfig).AsSingle();
-            
 
             Container.BindInterfacesAndSelfTo<MainHeroMovement>().AsSingle();
             Container.BindInterfacesAndSelfTo<ScreenBoundsCalculation>().AsSingle();

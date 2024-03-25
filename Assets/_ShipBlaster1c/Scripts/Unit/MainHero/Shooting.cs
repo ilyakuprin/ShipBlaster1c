@@ -30,7 +30,7 @@ namespace MainHero
         public void Initialize()
         {
             _ct = _heroView.GetCancellationTokenOnDestroy();
-            _enemyBitLayer = 1 << LayerCaching.Enemy;
+            _enemyBitLayer = LayerCaching.EnemyBitMask;
             
             Shoot().Forget();
         }
@@ -42,18 +42,22 @@ namespace MainHero
 
         private async UniTask Shoot()
         {
-            var hit = GetHit();
-            while (!hit)
+            RaycastHit2D hit = default;
+
+            while (hit.collider == null)
             {
                 hit = GetHit();
-
+                
+                await UniTask.NextFrame(_ct);
+                
+                while (_isPause)
+                    await UniTask.NextFrame(_ct);
+                
 #if UNITY_EDITOR
                 Debug.DrawRay(_heroView.FirePoint.position,
                               Vector2.up * _mainHeroConfig.RadiusFire,
                               Color.red);
 #endif
-                
-                await UniTask.NextFrame(_ct);
             }
 
             var bullet = _bulletFactory.Get();

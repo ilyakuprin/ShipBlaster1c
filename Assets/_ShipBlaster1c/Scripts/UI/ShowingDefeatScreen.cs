@@ -1,9 +1,8 @@
 using System;
 using MainHero;
-using UserInterface;
 using Zenject;
 
-namespace GameStatus
+namespace UserInterface
 {
     public class ShowingDefeatScreen : IInitializable, IDisposable
     {

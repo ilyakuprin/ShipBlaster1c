@@ -10,6 +10,8 @@ namespace Enemy
         private readonly EnemySpawning _enemySpawning;
         private readonly EnemyConfig _enemyConfig;
         private int _counter;
+        
+        public int StartCount { get; private set; }
 
         public EnemyCounter(EnemySpawning enemySpawning,
                             EnemyConfig enemyConfig)
@@ -20,7 +22,7 @@ namespace Enemy
         
         public void Initialize()
         {
-            _counter = Random.Range(_enemyConfig.MinCount, _enemyConfig.MaxCount + 1);
+            StartCount = Random.Range(_enemyConfig.MinCount, _enemyConfig.MaxCount + 1);
             _enemySpawning.Spawned += Count;
         }
 
@@ -31,12 +33,10 @@ namespace Enemy
 
         private void Count()
         {
-            _counter--;
-
-            if (_counter == 0)
-            {
+            _counter++;
+            
+            if (_counter == StartCount)
                 _enemySpawning.Dispose();
-            }
         }
     }
 }

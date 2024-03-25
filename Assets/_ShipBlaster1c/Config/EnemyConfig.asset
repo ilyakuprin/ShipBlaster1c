@@ -17,6 +17,6 @@ MonoBehaviour:
   <MaxSpeed>k__BackingField: 3.05
   <MinTimeoutSpawnInSec>k__BackingField: 1
   <MaxTimeoutSpawnInSec>k__BackingField: 2.17
-  <MinCount>k__BackingField: 8
-  <MaxCount>k__BackingField: 16
+  <MinCount>k__BackingField: 3
+  <MaxCount>k__BackingField: 3
   <Health>k__BackingField: 2

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MainHeroConfig
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 5.53
-  <RechargeWeaponInSec>k__BackingField: 0.31
+  <RechargeWeaponInSec>k__BackingField: 0.78
   <Health>k__BackingField: 2
-  <RadiusFire>k__BackingField: 7.15
+  <RadiusFire>k__BackingField: 6.13
