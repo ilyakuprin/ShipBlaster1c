@@ -13,10 +13,11 @@ namespace MainHero
         private readonly SpriteRenderer _spriteRenderer;
         private readonly PlayingFieldConfig _playingFieldConfig;
         
-        private float _leftBorder;
-        private float _rightBorder;
         private float _bottomBorder;
-        private float _upperBorder;
+        
+        public float LeftBorder { get; private set; }
+        public float RightBorder { get; private set; }
+        public float UpperBorder{ get; private set; } 
 
         public ScreenBoundsCalculation(Camera camera,
                                        MainHeroView mainHero,
@@ -32,8 +33,8 @@ namespace MainHero
 
         public Vector2 GetClamp(Vector2 targetPosition)
         {
-            targetPosition.x = Mathf.Clamp(targetPosition.x, _leftBorder, _rightBorder);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, _bottomBorder, _upperBorder);
+            targetPosition.x = Mathf.Clamp(targetPosition.x, LeftBorder, RightBorder);
+            targetPosition.y = Mathf.Clamp(targetPosition.y, _bottomBorder, UpperBorder);
             return targetPosition;
         }
 
@@ -46,10 +47,10 @@ namespace MainHero
 
             var leftBottomCorner = _camera.ViewportToWorldPoint(LowerLeftCorner);
             
-            _leftBorder = leftBottomCorner.x + halfPlayerSizeX;
-            _rightBorder = _camera.ViewportToWorldPoint(LowerRightCorner).x - halfPlayerSizeX;
+            LeftBorder = leftBottomCorner.x + halfPlayerSizeX;
+            RightBorder = _camera.ViewportToWorldPoint(LowerRightCorner).x - halfPlayerSizeX;
             _bottomBorder = leftBottomCorner.y + halfPlayerSizeY;
-            _upperBorder = (leftBottomCorner.y + sizeY * _playingFieldConfig.FinishLineHeightInMainHero)
+            UpperBorder = (leftBottomCorner.y + sizeY * _playingFieldConfig.FinishLineHeightInMainHero)
                            - halfPlayerSizeY;
         }
     }

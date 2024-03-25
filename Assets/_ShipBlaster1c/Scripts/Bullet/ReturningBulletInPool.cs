@@ -1,4 +1,5 @@
 using Factory;
+using UnityEngine;
 
 namespace Bullet
 {
@@ -11,9 +12,10 @@ namespace Bullet
             _pool = pool;
         }
 
-        public void Return(BulletView enemy)
+        public void Return(BulletView bullet)
         {
-            _pool.Return(enemy);
+            bullet.transform.localPosition = Vector3.zero;
+            _pool.Return(bullet);
         }
     }
 }

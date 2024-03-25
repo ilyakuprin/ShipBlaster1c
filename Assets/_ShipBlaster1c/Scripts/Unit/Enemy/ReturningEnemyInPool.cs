@@ -1,5 +1,6 @@
 using System;
 using Factory;
+using UnityEngine;
 
 namespace Enemy
 {
@@ -16,6 +17,7 @@ namespace Enemy
 
         public void Return(EnemyView enemy)
         {
+            enemy.transform.localPosition = Vector3.zero;
             _pool.Return(enemy);
             Returned?.Invoke();
         }

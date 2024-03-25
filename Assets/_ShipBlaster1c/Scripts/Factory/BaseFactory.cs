@@ -17,8 +17,12 @@ namespace Factory
             _prefab = prefab;
             _parent = parent;
         }
-        
+
         protected T GetCreateObject()
-            => _container.InstantiatePrefabForComponent<T>(_prefab, Vector3.zero, Quaternion.identity, _parent);
+        {
+            var obj = _container.InstantiatePrefabForComponent<T>(_prefab, Vector3.zero, Quaternion.identity, _parent);
+            obj.transform.localPosition = Vector3.zero;
+            return obj;
+        }
     }
 }

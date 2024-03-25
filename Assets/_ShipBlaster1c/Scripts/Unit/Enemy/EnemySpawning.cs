@@ -37,7 +37,7 @@ namespace Enemy
         public void Dispose()
         {
             if (_cts.IsCancellationRequested) return;
-
+            
             _cts.Cancel();
             _cts.Dispose();
         }

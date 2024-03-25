@@ -30,7 +30,7 @@ namespace Enemy
             }
 
             obj.SettingStartValues.InitValues();
-
+            
             return obj;
         }
 
